@@ -4,10 +4,10 @@ public class Result {
     int id_result;
     int id_member;
     String category;
-    String time;
+    int time;
     String place;
 
-    public Result(int id_result, int id_member, String category, String time, String place) {
+    public Result(int id_result, int id_member, String category, int time, String place) {
         this.id_result = id_result;
         this.id_member = id_member;
         this.category = category;
@@ -39,11 +39,11 @@ public class Result {
         this.category = category;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 

@@ -205,7 +205,7 @@ public class DAO {
                 int id_result = rs.getInt("id_results");
                 int id_member = rs.getInt("id_members");
                 String category = rs.getString("name");
-                String time = rs.getString("time");
+                int time = rs.getInt("time");
                 String place = rs.getString("place");
                 
                 Result result = new Result(id_result, id_member, category, time, place);
@@ -226,7 +226,7 @@ public class DAO {
         try {
             List<Result> results = new ArrayList<>();
             
-            String query = "select results.id_results, results.id_members, results.time, results.place, categories.name from results join categories on results.id_categories = categories.id_categories where results.id_categories = 1  order by time desc limit 3";
+            String query = "select results.id_results, results.id_members, results.time, results.place, categories.name from results join categories on results.id_categories = categories.id_categories where results.id_categories = 1  order by results.time asc limit 5";
             Connection con = connector.getConnection();
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -235,7 +235,7 @@ public class DAO {
                 int id_result = rs.getInt("id_results");
                 int id_member = rs.getInt("id_members");
                 String category = rs.getString("name");
-                String time = rs.getString("time");
+                int time = rs.getInt("time");
                 String place = rs.getString("place");
                 
                 Result result = new Result(id_result, id_member, category, time, place);
@@ -248,5 +248,51 @@ public class DAO {
         }
         
         return null;
+    }
+    
+    public List<Result> getTopResultsCrawl() {
+        try {
+            List<Result> results = new ArrayList<>();
+            
+            String query = "select results.id_results, results.id_members, results.time, results.place, categories.name from results join categories on results.id_categories = categories.id_categories where results.id_categories = 2  order by results.time asc limit 5";
+            Connection con = connector.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                int id_result = rs.getInt("id_results");
+                int id_member = rs.getInt("id_members");
+                String category = rs.getString("name");
+                int time = rs.getInt("time");
+                String place = rs.getString("place");
+                
+                Result result = new Result(id_result, id_member, category, time, place);
+                
+                results.add(result);
+            }
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    public void updateMember(int id_member, String name, int birthday, String active, String elite) {
+        try {
+            String query = "UPDATE `marsvinet`.`members` SET `name` = ?, `birthday` = ?, `active` = ?, `elite` = ? WHERE (`id_members` =" +  id_member + ")";
+            Connection con = connector.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, name);
+            pstmt.setInt(2, birthday);
+            pstmt.setString(3, active);
+            pstmt.setString(4, elite);
+            pstmt.execute();
+            con.close();
+            
+            System.out.println("Bruger updateret i database");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
