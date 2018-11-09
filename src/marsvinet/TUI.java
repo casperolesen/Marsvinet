@@ -14,9 +14,9 @@ public class TUI {
         System.out.println(data.getMember(1));
         System.out.println("");
         
-        System.out.println("Results");
-        System.out.println(data.getResults());
-        System.out.println("");
+//        System.out.println("Results");
+//        System.out.println(data.getResults());
+//        System.out.println("");
         
         System.out.println("Elite Senior");
         System.out.println(data.getTeamEliteSenior());
