@@ -55,6 +55,11 @@ public class Result {
         this.place = place;
     }
     
+    @Override
+    public String toString() {
+        return id_result + " " + id_member + " " + category + " " + time + " " + place;
+    }
+    
     
     
     
