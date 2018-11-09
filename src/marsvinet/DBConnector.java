@@ -19,6 +19,10 @@ public class DBConnector {
   		this.connection = (Connection) DriverManager.getConnection(url, USERNAME, PASSWORD);
 	}
 	
+        void hello() {
+            
+        }
+        
 	public Connection getConnection() {
                 //System.out.println("Forbundet til DB!");
   		return this.connection;
