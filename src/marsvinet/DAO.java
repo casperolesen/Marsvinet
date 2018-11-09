@@ -192,4 +192,33 @@ public class DAO {
         return null;
     }
 
+    public List<Result> getResults() {
+        try {
+            List<Result> results = new ArrayList<>();
+
+            String query = "select results.id_results, results.id_members, results.time, results.place, categories.name from results join categories on results.id_categories = categories.id_categories;";
+            Connection con = connector.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int id_result = rs.getInt("id_results");
+                int id_member = rs.getInt("id_members");
+                String category = rs.getString("name");
+                String time = rs.getString("time");
+                String place = rs.getString("place");
+                
+                Result result = new Result(id_result, id_member, category, time, place);
+                
+                results.add(result);
+            }
+
+            return results;
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
 }
