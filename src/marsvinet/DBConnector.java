@@ -7,7 +7,7 @@ public class DBConnector {
     private Connection connection = null;
 	
 	//Constants
-	private static final String IP       = "1ocalhost";
+	private static final String IP       = "10.50.137.122";
 	private static final String PORT     = "3306";
 	public  static final String DATABASE = "marsvinet";
 	private static final String USERNAME = "admin"; 
